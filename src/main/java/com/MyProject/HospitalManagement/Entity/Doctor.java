@@ -1,0 +1,35 @@
+package com.MyProject.HospitalManagement.Entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Doctor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false,length = 50)
+    private String name;
+
+    @Column(length = 50)
+    private String specialization;
+
+    @Column(unique = true,length = 50)
+    private  String email;
+
+    @OneToMany(mappedBy = "doctor")
+   // @JoinColumn(nullable = false)
+    private Set<Appointment> appointments = new HashSet<>();
+}
