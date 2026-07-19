@@ -15,7 +15,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@ToString
 @Getter
 @Setter
 public class Patient {
@@ -38,10 +37,11 @@ public class Patient {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_insurance", unique = true)
+    @ToString.Exclude
     private Insurance insurance;
 
-    @OneToMany(mappedBy = "patient") // Inverse side
+    @OneToMany(mappedBy = "patient" , cascade = CascadeType.ALL) // Inverse side
     private Set<Appointment> appointments =  new HashSet<>();
 }

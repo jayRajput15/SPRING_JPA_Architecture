@@ -19,4 +19,11 @@ public class PatientService {
         Patient p2 = patientRepository.findById(id).orElseThrow();
         return p1;
     }
+
+    @Transactional
+    public void deletePatient(Long patientId) {
+        Patient patient = patientRepository.findById(patientId).orElseThrow();
+        patientRepository.deleteById(patientId);
+    }
 }
+

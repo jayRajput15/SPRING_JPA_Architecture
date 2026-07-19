@@ -12,13 +12,18 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class InsuranceService {
 
-    private InsuranceRepository insuranceRepository;
+    private final InsuranceRepository insuranceRepository;
 
-    private PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
 
     @Transactional
-    public void assignInsuranceToPatient(Insurance insurance, Long patientId) {
+    public Insurance assignInsuranceToPatient(Insurance insurance, Long patientId) {
         Patient patient = patientRepository.findById(patientId).orElseThrow();
-        patient.setInsurance(insurance);
+        patient.setInsurance(insurance);  // Data Dirtied.
+        insurance.setPatient(patient);  // Bidirectional consistency
+
+        return insurance;
     }
+
+
 }
