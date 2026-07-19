@@ -29,8 +29,13 @@ public class PatientTest {
 //       for( BloodGroupStats patient : patientList ){
 //           System.out.println(patient);
 //       }
-        int affectRow = patientRepository.updatePatientNameWithId("Anuj",1L);
-        System.out.println(affectRow);
+//        int affectRow = patientRepository.updatePatientNameWithId("Anuj",1L);
+//        System.out.println(affectRow);
+
+        List<Patient> patients = patientRepository.getAllPatientsWithAppointment();
+        for( var p : patients){
+            System.out.println(p);
+        }
 
     }
 
